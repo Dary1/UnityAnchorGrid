@@ -7,6 +7,8 @@ namespace AnchorGridUnity {
         void OnValidate()
         {
             int rowCount = this.transform.childCount / ColumnCount;
+            if (this.transform.childCount < ColumnCount)
+                rowCount = 1;
             for (int i = 0; i < this.transform.childCount; i++) {
                 RectTransform r = this.transform.GetChild(i).GetComponent<RectTransform>();
                 r.anchorMin = new Vector2(((float)i) % ColumnCount / ColumnCount,(float)(rowCount - i / ColumnCount-1) / rowCount);
