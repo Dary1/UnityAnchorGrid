@@ -5,6 +5,8 @@ Who needs it?
 Unity GridLayout require you to input the size of the cells which leads you to problems when you are working on anchor based UI.
 AnchorGrid.cs automatically set anchors on child game objects to work like GridLayout. 
 
+You could work around this by using horizontal layout + vertical layout in conjunction by default but this is simplier solution and it works better when you dynamically want to populate the data on child game objects.
+
 Usage:
 1. simply import this cs into your project and add AnchorGrid to the parent container game object of objects you want to grid.
 2. set the column count to the number of column you need in the grid.
