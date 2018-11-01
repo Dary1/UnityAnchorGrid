@@ -6,13 +6,28 @@ namespace AnchorGridUnity {
     
         void OnValidate()
         {
-            int rowCount = this.transform.childCount / ColumnCount;
-            if (this.transform.childCount < ColumnCount)
+            float enabledObjectCount = 0;
+            for (int i = 0; i < this.transform.childCount; i++)
+            {
+                if (this.transform.GetChild(i).gameObject.GetActive())
+                    enabledObjectCount++;
+            }
+
+            int rowCount = Mathf.CeilToInt(enabledObjectCount / ColumnCount);
+            if (enabledObjectCount < ColumnCount)
                 rowCount = 1;
+
+            int posIndex = 0;
+
             for (int i = 0; i < this.transform.childCount; i++) {
-                RectTransform r = this.transform.GetChild(i).GetComponent<RectTransform>();
-                r.anchorMin = new Vector2(((float)i) % ColumnCount / ColumnCount,(float)(rowCount - i / ColumnCount-1) / rowCount);
-                r.anchorMax = new Vector2((((float)i) % ColumnCount+1) / ColumnCount,(float)(rowCount - i / ColumnCount) / rowCount);
+                GameObject go = this.transform.GetChild(i).gameObject;
+
+                if (go.GetActive()) {
+                    RectTransform r = go.GetComponent<RectTransform>();                    
+                    r.anchorMin = new Vector2(((float)posIndex) % ColumnCount / ColumnCount, (float)(rowCount - posIndex / ColumnCount - 1) / rowCount);
+                    r.anchorMax = new Vector2((((float)posIndex) % ColumnCount + 1) / ColumnCount, (float)(rowCount - posIndex / ColumnCount) / rowCount);
+                    posIndex++;
+                }
             }
         }
     }
