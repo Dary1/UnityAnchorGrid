@@ -1,6 +1,6 @@
 using UnityEngine;
 namespace AnchorGridUnity {
-    public class AnchorGridUnity: MonoBehaviour {
+    public class AnchorGrid: MonoBehaviour {
 
         public int ColumnCount = 5;
     
